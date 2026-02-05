@@ -34,6 +34,87 @@ becomes:
 ```
 int, x, =, 10, ;
 ```
+---
+## **Algorithm: Lexical Analyzer**
+
+**Input:** Source code string
+**Output:** List of tokens (Keywords, Identifiers, Numbers, Operators, Separators, Unknown tokens)
+
+### **Algorithm Steps**
+
+1. **Start**
+
+2. **Initialize**:
+
+   * `i = 0`  // index of current character in input
+   * `buffer = ""`  // temporary string to store multi-character tokens
+
+3. **Read the source code** into `code[]` array
+
+4. **While** `code[i] != '\0'` do:
+
+   1. **Skip Whitespace**:
+
+      * **If** `code[i]` is `' '` (space), `'\t'` (tab), or `'\n'` (newline):
+
+        * Increment `i`
+        * **Continue** to next iteration
+
+   2. **Check Operator**:
+
+      * **If** `code[i]` is in `{ '+', '-', '*', '/', '=' }` then:
+
+        * Print `"Operator: "` + `code[i]`
+        * Increment `i`
+        * **Continue** to next iteration
+
+   3. **Check Separator**:
+
+      * **If** `code[i]` is in `{ '(', ')', '{', '}', ';', ',' }` then:
+
+        * Print `"Separator: "` + `code[i]`
+        * Increment `i`
+        * **Continue** to next iteration
+
+   4. **Check Keyword or Identifier**:
+
+      * **If** `code[i]` is alphabetic (`A-Z` or `a-z`):
+
+        * Initialize `buffer = ""`
+        * **While** `code[i]` is alphanumeric (`A-Z`, `a-z`, `0-9`):
+
+          * Append `code[i]` to `buffer`
+          * Increment `i`
+        * **End While**
+        * **If** `buffer` is in keyword list (`int`, `float`, `if`, `else`, `while`, `return`) then:
+
+          * Print `"Keyword: "` + `buffer`
+        * **Else**:
+
+          * Print `"Identifier: "` + `buffer`
+
+   5. **Check Number**:
+
+      * **If** `code[i]` is a digit (`0-9`):
+
+        * Initialize `buffer = ""`
+        * **While** `code[i]` is a digit (`0-9`):
+
+          * Append `code[i]` to `buffer`
+          * Increment `i`
+        * **End While**
+        * Print `"Number: "` + `buffer`
+
+   6. **Unknown Token**:
+
+      * **Else**:
+
+        * Print `"Unknown token: "` + `code[i]`
+        * Increment `i`
+
+5. **End While**
+
+6. **Stop**
 
 ---
 
